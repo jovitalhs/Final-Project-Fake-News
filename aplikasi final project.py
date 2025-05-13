@@ -46,19 +46,18 @@ def main():
         st.markdown(desc_temp, unsafe_allow_html=True)
 
     elif choice == "Prediction":
-        st.subheader("Enter News Title and Content")
-        title = st.text_input("News Title")
-        content = st.text_area("News Content", height=200)
+    st.subheader("Enter News Title and Content")
+    title = st.text_input("News Title")
+    content = st.text_area("News Content", height=200)
 
-        if st.button("Predict"):
-            if not title or not content:
-                st.error("Please provide both title and content.")
-            else:
-                combined = f"{title} {content}"
-                cleaned = clean_text(combined)
-                pred = model.predict([cleaned])[0]
-                label = "REAL 📰" if pred == 1 else "FAKE 🚩"
-                st.success(f"Prediction: *{label}*")
+    if st.button("Predict"):
+        if not title or not content:
+            st.error("Please provide both title and content.")
+        else:
+            combined = f"{title} {content}"
+            pred = model.predict([combined])[0]
+            label = "REAL 📰" if pred == 1 else "FAKE 🚩"
+            st.success(f"Prediction: *{label}*")
 
 if __name__ == "__main__":
     main()
